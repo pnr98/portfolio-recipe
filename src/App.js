@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import Main from "./pages/Main";
+import { AppContainer } from "./style/App.styled";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/LoadingScreen";
+import Header from "./components/common/Header";
+import Login from "./pages/Login";
+import AddRecipe from "./pages/AddRecipe";
+import MyPage from "./pages/MyPage";
+import RecipeDetail from "./pages/RecipeDetail";
+import SignUp from "./pages/SignUp";
+import Start from "./pages/Start";
+import { auth } from "./firebase";
 
-function App() {
+export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const init = async () => { // firebase가 쿠키와 토큰을 읽고 백엔드와 소통해서 로그인여부를 확인하는 동안 기다리겠다는 것
+    await auth.authStateReady(); // 인증상태가 준비되었는지 기다림
+    setIsLoading(false)
+  }
+  useEffect(() => {
+    init();
+  },[]);
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+        <Header />
+      {isLoading ? <LoadingScreen /> :
+        <Routes>
+          <Route path="/" element={<Start />} />
+          <Route path="/home" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/register" element={<AddRecipe />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/recipe-detail" element={<RecipeDetail />} />
+        </Routes>
+      }
+    </AppContainer>
   );
 }
 
-export default App;
