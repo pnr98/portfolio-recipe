@@ -10,6 +10,7 @@ import MyPage from "./pages/MyPage";
 import RecipeDetail from "./pages/RecipeDetail";
 import SignUp from "./pages/SignUp";
 import Start from "./pages/Start";
+import ProtectedRoute from "./components/protected-route";
 import { auth } from "./firebase";
 
 export default function App() {
@@ -31,9 +32,11 @@ export default function App() {
           <Route path="/home" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/register" element={<AddRecipe />} />
-          <Route path="/mypage" element={<MyPage />} />
           <Route path="/recipe-detail" element={<RecipeDetail />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/register" element={<AddRecipe />} />
+            <Route path="/mypage" element={<MyPage />} />
+          </Route>
         </Routes>
       }
     </AppContainer>

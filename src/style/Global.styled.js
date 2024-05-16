@@ -8,8 +8,9 @@ export const GlobalStyle = createGlobalStyle`
         --orange-00 : #F8F5EA;
         --orange-10 : #F5C95B;
         --orange-20 : #F2B824;
-        --orange-30 : #F29F24;
-        --orange-40 : #F27C24;
+        --orange-30 : #efa310;
+        --orange-40 : #ed9c00;
+        --orange-50 : #dc950a;
         --yellow-10 : #F2D124;
         --yellow-20 : #F2EB24;
         --sky-blue : #E1ECF4;
@@ -20,6 +21,7 @@ export const GlobalStyle = createGlobalStyle`
         --gray: #888888;
         --gray-10 : #D9D9D9;
         --gray-20 : #525960;
+        --blue: #1d9bf0;
     }
     ${reset}
   * {
@@ -37,6 +39,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans KR', 'Roboto', sans-serif;
         vertical-align: baseline;
         color: var(--black);
+        text-align: center;
     }
 
     ol, ul {
@@ -46,4 +49,9 @@ export const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
 }
+    input {
+        appearance: none; 
+        outline: none;
+        background-color: transparent;
+    }
 `;

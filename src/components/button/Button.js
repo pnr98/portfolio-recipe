@@ -1,5 +1,4 @@
 import { styled, css } from 'styled-components';
-import { GlobalStyle } from '../../style/Global.styled';
 
 const StyledButton = styled.button`
     border: none;

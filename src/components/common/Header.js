@@ -1,5 +1,8 @@
 import { styled } from 'styled-components';
 import { Link } from 'react-router-dom';
+import Button from '../button/Button'
+import { auth } from '../../firebase';
+import { useState } from 'react';
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -49,7 +52,11 @@ const StyledLink = styled(Link)`
     }
 `;
 
-export default function Header({isLoggedIn}) {
+export default function Header() {
+    const [isLogin, setIsLogin] = useState(false)
+    const logOut = () => {
+        auth.signOut();
+    }
     return (
         <HeaderContainer>
             <NavContainer>
@@ -60,7 +67,7 @@ export default function Header({isLoggedIn}) {
                 </LogoBox>
                 <ContentContainer>
                     <StyledUl>
-                        {!isLoggedIn ? (
+                        {!isLogin ? (
                             <>
                                 <StyledLi><StyledLink to="/login">로그인</StyledLink></StyledLi>
                                 <StyledLi><StyledLink to="/sign-up">회원가입</StyledLink></StyledLi>
@@ -70,7 +77,7 @@ export default function Header({isLoggedIn}) {
                             <>
                                 <StyledLi><StyledLink to="/register">레시피 작성</StyledLink></StyledLi>
                                 <StyledLi><StyledLink to="/mypage">마이페이지</StyledLink></StyledLi>
-                                <StyledLi><StyledLink to="/logout">로그아웃</StyledLink></StyledLi>
+                                <StyledLi><Button onClick={logOut} >로그아웃</Button></StyledLi>
                             </>
                         )}
                     </StyledUl>
