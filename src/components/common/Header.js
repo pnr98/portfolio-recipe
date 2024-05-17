@@ -1,8 +1,9 @@
 import { styled } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../button/Button'
 import { auth } from '../../firebase';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/action/login';
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -53,9 +54,19 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Header() {
-    const [isLogin, setIsLogin] = useState(false)
-    const logOut = () => {
-        auth.signOut();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const loginState = useSelector((state) => state.loginReducer) // loginReducer의 상태를 가져옴
+    const isLogin = loginState.isLoggedIn
+
+    const onLogOut = async () => {
+        const ok = window.confirm("로그아웃 하시겠습니까?")
+        if(ok) {
+            await auth.signOut();
+            dispatch(logout()) // 로그아웃 액션을 디스패치하여 Redux 상태를 업데이트
+            navigate('/login')
+        }
+
     }
     return (
         <HeaderContainer>
@@ -77,7 +88,7 @@ export default function Header() {
                             <>
                                 <StyledLi><StyledLink to="/register">레시피 작성</StyledLink></StyledLi>
                                 <StyledLi><StyledLink to="/mypage">마이페이지</StyledLink></StyledLi>
-                                <StyledLi><Button onClick={logOut} >로그아웃</Button></StyledLi>
+                                <StyledLi><Button onClick={onLogOut} >로그아웃</Button></StyledLi>
                             </>
                         )}
                     </StyledUl>
