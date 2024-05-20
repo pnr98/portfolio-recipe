@@ -32,15 +32,15 @@ export const Input = styled.input`
     font-size: 15px;
     &[type="submit"] {
         color: var(--white);
-        border: var(--orange-30);
-        background: var(--orange-30);
-        font-weight: 600;
+        border: var(--orange-20);
+        background: var(--orange-20);
+        font-weight: 500;
         line-height: 20px;
         &:hover {
-            background: var(--orange-40);
+            background: var(--orange-30);
         }
-        &:active {
-            background: var(--orange-50);
+        &:focus {
+            box-shadow: 0 0 0 4px var(--orange-shadow);
         }
     }
 `
@@ -55,4 +55,12 @@ export const SignLink = styled.span`
     a {
         color: var(--blue)
     }
+`
+export const CheckboxLabel = styled.label`
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+`;
+export const CheckBox = styled.input`
+    margin-right: 10px;
 `

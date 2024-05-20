@@ -37,7 +37,7 @@ const StyledLi = styled.li`
     display: flex;
 `
 const StyledLink = styled(Link)`
-    padding: 10px 12px;
+    padding: 12px 16px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -64,6 +64,7 @@ export default function Header() {
         if(ok) {
             await auth.signOut();
             dispatch(logout()) // 로그아웃 액션을 디스패치하여 Redux 상태를 업데이트
+            localStorage.removeItem("user");
             navigate('/login')
         }
 
@@ -82,7 +83,6 @@ export default function Header() {
                             <>
                                 <StyledLi><StyledLink to="/login">로그인</StyledLink></StyledLi>
                                 <StyledLi><StyledLink to="/sign-up">회원가입</StyledLink></StyledLi>
-                                <StyledLi><StyledLink to="/guest-login">게스트 로그인</StyledLink></StyledLi>
                             </>
                         ) : (
                             <>

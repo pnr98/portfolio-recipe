@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
         --main-width: 1264px;
         --main-height: calc(100vh - 382px);
         --orange-00 : #F8F5EA;
+        --orange-shadow : #ffd88c;
         --orange-10 : #F5C95B;
         --orange-20 : #F2B824;
         --orange-30 : #efa310;
@@ -50,7 +51,6 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
 }
     input {
-        appearance: none; 
         outline: none;
         background-color: transparent;
     }

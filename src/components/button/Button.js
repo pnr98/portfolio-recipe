@@ -9,6 +9,7 @@ const StyledButton = styled.button`
     color: var(--brown);
     font-weight: 700;
     background: var(--white);
+    font-size: 15px;
     &:hover {
         background: var(--orange-00);
     }
