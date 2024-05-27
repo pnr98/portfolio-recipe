@@ -30,17 +30,25 @@ export const Input = styled.input`
     border: 2px var(--gray-10) solid;
     width: 80%;
     font-size: 15px;
+    background-color: none;
+    /* &:hover {
+        border: 2px var(--gray-20) solid;
+        }
+    &:focus {
+        border: 2px var(--orange-10) solid;
+    } */
+
     &[type="submit"] {
         color: var(--white);
-        border: var(--orange-20);
+        border: none;
         background: var(--orange-20);
         font-weight: 500;
         line-height: 20px;
         &:hover {
-            background: var(--orange-30);
+            background: var(--orange-20-hover);
         }
-        &:focus {
-            box-shadow: 0 0 0 4px var(--orange-shadow);
+        &:active {
+            box-shadow: 0 0 0 4px var(--orange-20-active);
         }
     }
 `
