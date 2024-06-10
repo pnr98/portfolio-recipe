@@ -1,4 +1,4 @@
-import { styled, createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 export const GlobalStyle = createGlobalStyle`
@@ -29,9 +29,24 @@ export const GlobalStyle = createGlobalStyle`
         --gray-10 : #D9D9D9;
         --gray-20 : #525960;
         --blue: #1d9bf0;
+
+        --font-size-lg: clamp(2rem, 4vw, 3.5rem);
+        --font-size-md: clamp(1.5rem, 3vw, 2.5rem);
+        --font-size-sm: clamp(1rem, 1vw, 1.5rem);
     }
+
+
+    @font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    }
+    @font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    }
+
     ${reset}
-  * {
+    * {
         box-sizing: border-box;
     }
 
@@ -40,14 +55,15 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
         min-height : 100vh;
         width: 100vw;
-        overflow-x: hidden;
-        overflow-y: scroll;
+        overflow: hidden;
+        overflow-y: auto;
         font: inherit;
-        font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+        font-family: 'Pretendard-Regular', 'Noto Sans KR', 'Roboto', sans-serif;
         vertical-align: baseline;
         color: var(--black);
         text-align: center;
     }
+    
 
     ol, ul {
         list-style: none;
