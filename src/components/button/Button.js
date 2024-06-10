@@ -3,10 +3,11 @@ import { styled, css } from 'styled-components';
 const StyledButton = styled.button`
     border: none;
     cursor: pointer;
+    display: flex;
     justify-content: center;
     border-radius: 8px;
     color: var(--brown);
-
+    font-family: 'Pretendard-Regular';
     /* 색상 */
     ${(props) => props.color && COLORS[props.color]}
 

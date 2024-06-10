@@ -1,15 +1,26 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
+// fetchRecipe를 실행하니, 환경변수로 설정한 코드를 인식 못함.
 const firebaseConfig = {
-    apiKey: "AIzaSyApbWbTrm0yBQgsaKd-LXTS1GD61r8uPTg",
-    authDomain: "my-recipe-f421e.firebaseapp.com",
-    projectId: "my-recipe-f421e",
-    storageBucket: "my-recipe-f421e.appspot.com",
-    messagingSenderId: "51477939559",
-    appId: "1:51477939559:web:789d972de146ac5cef1bc2"
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+
+export const storage = getStorage(app);
+
+export const db = getFirestore(app);
+
+
+
+

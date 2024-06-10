@@ -81,7 +81,7 @@ export default function Header() {
             <Modal isOpen={isOpen} onClose={closeModal} type={modalType} func={onLogOut}/>
             <NavContainer>
                 <LogoBox>
-                    <Link to="/home">
+                    <Link to="/">
                         <LogoImg src='logo1.png' />
                     </Link>
                 </LogoBox>
