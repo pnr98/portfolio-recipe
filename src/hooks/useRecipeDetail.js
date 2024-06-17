@@ -1,5 +1,5 @@
 import { doc, getDoc } from "firebase/firestore"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { db } from "../firebase"
 
 export default function useRecipeDetail (id){
@@ -7,15 +7,14 @@ export default function useRecipeDetail (id){
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
 
-    const fetchRecipe = async () => {
+    const fetchRecipe = useCallback(async () => {
         try {
             const recipeDoc = doc(db, 'recipes', id)
             const recipeData = await getDoc(recipeDoc)
             
             if(recipeData.exists()) {
-                setRecipe({ id, ...recipeData.data() })
+                setRecipe({ id: recipeDoc.id, ...recipeData.data() })
             } else {
-                
                 setError('No such document!');
             }
             setLoading(false)
@@ -23,10 +22,11 @@ export default function useRecipeDetail (id){
         } catch(err) {
             setError(`Error fetching recipe: ${err.message}`)
         }
-    }
-    useEffect(() => {
-        fetchRecipe()
     }, [id])
 
-    return { recipe, loading, error}
+    useEffect(() => {
+        fetchRecipe()
+    }, [fetchRecipe])
+
+    return { recipe, loading, error, fetchRecipe}
 }

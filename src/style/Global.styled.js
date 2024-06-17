@@ -18,6 +18,10 @@ export const GlobalStyle = createGlobalStyle`
 
         --orange-30 : #ed9c00;
         --orange-40 : #dc950a;
+        
+        --orange-50: #FDF3E7;
+        --orange-60: #E1742F;
+
         --yellow-10 : #F2D124;
         --yellow-20 : #F2EB24;
         --sky-blue : #E1ECF4;
@@ -25,6 +29,7 @@ export const GlobalStyle = createGlobalStyle`
         --white-10 : #f1f2f3;
         --black: #000000;
         --brown: #513000;
+        --brown-10 : #735542;
         --gray: #888888;
         --gray-10 : #D9D9D9;
         --gray-20 : #525960;
@@ -71,6 +76,7 @@ export const GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
+        color: var(--brown);
 }
     input {
         outline: none;

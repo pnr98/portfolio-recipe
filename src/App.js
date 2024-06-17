@@ -26,7 +26,8 @@ export default function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/recipe/:id" element={<RecipeDetailPage />} />
+          {/* <Route path="/recipe/:id" element={<RecipeDetailPage />} /> */}
+          <Route path="/recipe" element={<RecipeDetailPage />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/register" element={<AddRecipe />} />
             <Route path="/mypage" element={<MyPage />} />
