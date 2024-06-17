@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import Tag from "../tag/Tag"
 import { FaBookmark } from "react-icons/fa6"
-import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 const CardContainer = styled.div`
     display: flex;
@@ -76,24 +76,20 @@ export default function RecipeCard( {recipe} ) {
     const {id, recipe_name, image_URL, food_type, difficulty, cook_time } = recipe;
     const tags = [food_type, difficulty, cook_time]
 
-    const navigate = useNavigate()
-
-    const handleClick = () => {
-        navigate(`/recipe/${id}`)
-    }
-    
     return (
-        <CardContainer onClick={handleClick}>
-            <ImgContainer>
-                <img src={image_URL} alt={recipe_name}></img>
-                <Bookmark>
-                    <StyledMark />
-                </Bookmark>
-            </ImgContainer>
-            <RecipeInfo>
-                <RecipeName>{recipe_name}</RecipeName>
-                <Tag tags={tags} />
-            </RecipeInfo>
+        <CardContainer >
+            <Link to={`/recipe/${id}`}>
+                <ImgContainer>
+                    <img src={image_URL} alt={recipe_name}></img>
+                    <Bookmark>
+                        <StyledMark />
+                    </Bookmark>
+                </ImgContainer>
+                <RecipeInfo>
+                    <RecipeName>{recipe_name}</RecipeName>
+                    <Tag tags={tags} />
+                </RecipeInfo>
+            </Link>
         </CardContainer>
     )
 }

@@ -51,7 +51,7 @@ const Slide = styled.ul`
 export default function Carousel({ children, fetchMoreRecipes, hasMore }) {
     const carouselRef = useRef(null)
     const isScrolling = useRef(false) // 스크롤 중인지 확인.
-    const [currentSlide, setCurrentSlide] = useState(0); // 슬라이드 리스트의 전체 너비(5개)
+    const [currentSlide, setCurrentSlide] = useState(0); // 슬라이드 위치
     const [slideWidth, setSlideWidth] = useState(0) // 슬라이드 가로길이 for 동적  
 
     const scroll = async (direction) => {
@@ -59,17 +59,19 @@ export default function Carousel({ children, fetchMoreRecipes, hasMore }) {
 
         const { current } = carouselRef;
         if(current) {
-            const childWidth = current.firstChild.offsetWidth; 
+            const childWidth = current.firstChild.offsetWidth; // slide(ul)의 첫번째 자식의 width
             const scrollAmount = childWidth * 5;
             isScrolling.current = true;
 
             if (direction === "left") {
                 setCurrentSlide(prev => Math.max(prev - scrollAmount, 0))
             } else if (direction === "right") {
-                if (currentSlide + scrollAmount >= current.scrollWidth - current.offsetWidth) {
+                if (currentSlide + scrollAmount >= current.scrollWidth - current.offsetWidth) { 
+                    // 현재 슬라이드 위치에서 스크롤 하려는 양 >= 전체 슬라이드 리스트 너비 - 현재 화면에 보이는 슬라이드 너비 (남은 슬라이드)
+                    // => 참일 경우, 슬라이드가 끝에 도달했음
                     if (hasMore) {
                         await fetchMoreRecipes();
-                    }
+                    } // 불러올 레시피가 더이상 없으면, 레시피를 작성하라는 문구
                 }
                 setCurrentSlide(prev => prev + scrollAmount);
             }
@@ -79,28 +81,14 @@ export default function Carousel({ children, fetchMoreRecipes, hasMore }) {
             }, 500); // 0.5초 후 스크롤 다시 허용
         }
     }
-
-    const handleScroll = useCallback(() => {
-        const {current} = carouselRef
-        if(current && current.scrollLeft + current.offsetWidth >= current.scrollWidth) {
-            fetchMoreRecipes()
-        }
-    }, [fetchMoreRecipes])
     
     useEffect(() => {
         const { current } = carouselRef;
         if (current) {
-            current.addEventListener('scroll', handleScroll);
-            //
             const childWidth = current.firstChild && current.firstChild.offsetWidth;
             setSlideWidth(childWidth * 5);
         }
-        return () => {
-            if (current) {
-                current.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, [handleScroll, children]);
+    }, [children]);
 
     const rightButtonHidden = !hasMore && (currentSlide + slideWidth >= carouselRef.current?.scrollWidth);
 
@@ -112,6 +100,7 @@ export default function Carousel({ children, fetchMoreRecipes, hasMore }) {
             <SlideContainer>
                 <Slide ref={carouselRef} translate={-currentSlide} width={slideWidth}>
                     {children}
+                    {/* 레시피를 추가해 주세요. */}
                 </Slide>
             </SlideContainer>
             <Button right="true" onClick={() => scroll("right")} hidden={rightButtonHidden}>
